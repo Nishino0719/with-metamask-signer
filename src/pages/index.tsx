@@ -1,4 +1,14 @@
+import { Config, DAppProvider, Mainnet, Ropsten } from '@usedapp/core';
+import { getDefaultProvider } from 'ethers';
 import Head from 'next/head';
+import { DecentralizedApplication } from '../components/DecentralizedApplication';
+
+const config: Config = {
+  readOnlyChainId: Ropsten.chainId,
+  readOnlyUrls: {
+    [Ropsten.chainId]: getDefaultProvider('ropsten')
+  }
+};
 
 export default function Home() {
   return (
@@ -9,9 +19,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="p-10">
-        <p className="text-3xl">Welcome to Next.js x Tailwind css🎉</p>
-      </div>
+      <DAppProvider config={config}>
+        <DecentralizedApplication />
+      </DAppProvider>
     </div>
   );
 }
