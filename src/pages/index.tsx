@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
 export default function Home() {
   return (
@@ -13,5 +13,5 @@ export default function Home() {
         <p className="text-3xl">Welcome to Next.js x Tailwind css🎉</p>
       </div>
     </div>
-  )
+  );
 }
