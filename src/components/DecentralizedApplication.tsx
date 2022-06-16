@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useEtherBalance, useEthers } from '@usedapp/core';
+import { ChainId, useEtherBalance, useEthers } from '@usedapp/core';
 import { formatEther } from 'ethers/lib/utils';
+import { ethers, providers, version } from 'ethers';
 import {
   getDecryptionMessage,
   getEncryptionPublicKey,
+  getPersonalSign,
   pkEncrypt
 } from '../lib/utils';
 type Props = {};
@@ -27,6 +29,12 @@ export const DecentralizedApplication: React.FC<Props> = (props) => {
   };
   const _dec = async () => {
     const message = await getDecryptionMessage(enc, account);
+    console.log(message);
+  };
+  const _sign = async () => {
+    const provider = new providers.Web3Provider((window as any).ethereum);
+    const signer = provider.getSigner();
+    const message = await getPersonalSign(signer, 3, '4');
     console.log(message);
   };
 
@@ -71,6 +79,12 @@ export const DecentralizedApplication: React.FC<Props> = (props) => {
                   className="p-3 border rounded shadow border-cyan-400"
                 >
                   Decrypt
+                </button>
+                <button
+                  onClick={_sign}
+                  className="p-3 border rounded shadow border-cyan-400"
+                >
+                  Sign
                 </button>
               </div>
             </div>
